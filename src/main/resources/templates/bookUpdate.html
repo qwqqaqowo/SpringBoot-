@@ -2,32 +2,33 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>新增图书</title>
+  <title>修改图书</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
 <div class="form-box">
-  <h2 class="title">新增图书</h2>
-  <form action="/book/add" method="get">
+  <h2 class="title">修改图书</h2>
+  <form action="/book/update" method="get">
+    <input type="hidden" name="id" th:value="${book.id}">
     <div class="form-item">
       <label>书名</label>
-      <input name="name" required>
+      <input name="name" th:value="${book.name}">
     </div>
     <div class="form-item">
       <label>作者</label>
-      <input name="author" required>
+      <input name="author" th:value="${book.author}">
     </div>
     <div class="form-item">
       <label>价格</label>
-      <input name="price" required>
+      <input name="price" th:value="${book.price}">
     </div>
     <div class="form-item">
       <label>分类</label>
-      <input name="type" required>
+      <input name="type" th:value="${book.type}">
     </div>
     <div class="form-btn">
-      <button class="btn btn-update">保存</button>
+      <button class="btn btn-update">保存修改</button>
     </div>
   </form>
 </div>

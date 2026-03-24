@@ -15,23 +15,44 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    // 图书列表页面
     @GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("bookList", bookService.findAll());
-        return "bookList";  // 去找 templates/bookList.html
+        return "bookList";
     }
 
-    // 去新增页面
     @GetMapping("/toAdd")
     public String toAdd() {
-        return "bookAdd";   // 去找 templates/bookAdd.html
+        return "bookAdd";
     }
 
-    // 执行新增 → 新增完跳回列表
     @GetMapping("/add")
     public String add(Book book) {
         bookService.addBook(book);
-        return "redirect:/book/list"; // 新增成功 → 回到列表页
+        return "redirect:/book/list";
+    }
+
+    @GetMapping("/delete")
+    public String delete(Integer id) {
+        bookService.deleteById(id);
+        return "redirect:/book/list";
+    }
+
+    @GetMapping("/toUpdate")
+    public String toUpdate(Integer id, Model model) {
+        model.addAttribute("book", bookService.findById(id));
+        return "bookUpdate";
+    }
+
+    @GetMapping("/update")
+    public String update(Book book) {
+        bookService.update(book);
+        return "redirect:/book/list";
+    }
+
+    // ====================== 登录页面接口（关键！！）======================
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
     }
 }

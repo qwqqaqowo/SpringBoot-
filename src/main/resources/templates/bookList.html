@@ -2,43 +2,39 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>图书管理列表</title>
-  <style>
-    table {border-collapse: collapse; width: 80%; margin: 20px auto;}
-    th,td {border: 1px solid #ccc; padding: 10px; text-align: center;}
-    th {background-color: #f0f0f0;}
-    a {text-decoration: none; color: blue; margin: 0 5px;}
-    .add-btn {display: block; width: 120px; margin: 20px auto; text-align: center;}
-  </style>
+  <title>图书列表</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h2 style="text-align: center;">图书管理系统</h2>
 
-<!-- 新增按钮 -->
-<a class="add-btn" href="/book/toAdd">➕ 新增图书</a>
+<div class="container">
+  <h2 class="title">图书管理列表</h2>
+  <a href="/book/toAdd" class="btn btn-add">新增图书</a>
 
-<!-- 图书列表表格 -->
-<table>
-  <tr>
-    <th>ID</th>
-    <th>图书名称</th>
-    <th>作者</th>
-    <th>价格</th>
-    <th>分类</th>
-    <th>操作</th>
-  </tr>
-  <!-- 遍历后台传过来的数据 -->
-  <tr th:each="book : ${bookList}">
-    <td th:text="${book.id}">1</td>
-    <td th:text="${book.name}">SpringBoot实战</td>
-    <td th:text="${book.author}">张三</td>
-    <td th:text="${book.price}">59.8</td>
-    <td th:text="${book.type}">技术</td>
-    <td>
-      <a href="#">📝 修改</a>
-      <a href="#">🗑️ 删除</a>
-    </td>
-  </tr>
-</table>
+  <div class="table-box">
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>书名</th>
+        <th>作者</th>
+        <th>价格</th>
+        <th>分类</th>
+        <th>操作</th>
+      </tr>
+      <tr th:each="book:${bookList}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.price}"></td>
+        <td th:text="${book.type}"></td>
+        <td>
+          <a th:href="@{/book/toUpdate(id=${book.id})}" class="btn btn-update">修改</a>
+          <a th:href="@{/book/delete(id=${book.id})}" class="btn btn-delete" onclick="return confirm('确定删除？')">删除</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
 </body>
 </html>
