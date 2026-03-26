@@ -16,17 +16,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // 登录提交
-    @GetMapping("/login")
+    // 这里改成 /book/login ！！！
+    @GetMapping("/book/login")
     public String login(User user, HttpSession session) {
         User loginUser = userService.login(user);
 
         if (loginUser != null) {
-            // 登录成功 → 跳转到图书列表
             session.setAttribute("user", loginUser);
+            // 跳图书列表 ✅
             return "redirect:/book/list";
         } else {
-            // 登录失败 → 回到登录页
             return "login";
         }
     }
